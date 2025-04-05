@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  user-management-db:
+    image: postgres
+    container_name: user-management-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=user-management
+    volumes:
+      - user_management_service_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "user-management"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  user_management_service_db_data:
+    driver: local
