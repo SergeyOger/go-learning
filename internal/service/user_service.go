@@ -20,3 +20,10 @@ func (s *UserService) GetUser(id int) (*models.User, error) {
 func (s *UserService) RegisterUser(user *models.User) error {
 	return s.repo.CreateUser(user)
 }
+
+func (s *UserService) RemoveUser(id int) error {
+	return s.repo.DeleteUser(id)
+}
+func (s *UserService) ListUsers() ([]models.User, error) {
+	return s.repo.GetAllUsers()
+}
